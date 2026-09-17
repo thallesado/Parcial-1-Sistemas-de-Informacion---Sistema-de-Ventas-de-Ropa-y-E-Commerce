@@ -1,0 +1,11 @@
+{
+  "name": "Vesta Store",
+  "short_name": "Vesta",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F5F2EC",
+  "theme_color": "#111111",
+  "description": "Demo de tienda de moda y sistema interno.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false
+}
