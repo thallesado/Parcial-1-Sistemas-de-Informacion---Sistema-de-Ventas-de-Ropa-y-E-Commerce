@@ -8,6 +8,11 @@ base de datos.
 La documentación técnica completa del alcance, arquitectura, funcionalidades y
 pendientes se encuentra en [DOCUMENTACION.md](DOCUMENTACION.md).
 
+La planificación de alcance, requerimientos, reglas de negocio, modelo de datos,
+arquitectura y backlog se encuentra en [PLANIFICACION.md](PLANIFICACION.md).
+
+El backend NestJS con PostgreSQL se encuentra en [backend/README.md](backend/README.md).
+
 ## Estructura
 
 ```text

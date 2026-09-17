@@ -25,8 +25,8 @@ API, autenticación, persistencia ni integración con servicios externos.
 | Panel administrativo | Implementado como vista demostrativa con métricas fijas y datos del catálogo |
 | Punto de venta | Flujo de venta simulado, sin cobro ni descuento real de inventario |
 | Modelo de datos | Definido de forma conceptual e interactiva dentro del frontend |
-| Backend | Solo estructura de carpetas y README |
-| Base de datos | No creada ni conectada |
+| Backend | Primer corte NestJS implementado con CRUD y operación de ventas |
+| Base de datos | Esquema PostgreSQL reproducible; requiere levantar PostgreSQL y ejecutar SQL |
 | Pruebas automatizadas | No hay pruebas de aplicación; solo está creada la carpeta `backend/tests` |
 
 ## 3. Tecnologías y organización
@@ -60,9 +60,10 @@ backend/src/
 └── utils/
 ```
 
-Actualmente esas carpetas contienen únicamente archivos `.gitkeep`. No se ha
-seleccionado todavía un framework de servidor, motor de base de datos ni
-estrategia de autenticación.
+El primer corte ya utiliza NestJS, TypeORM y PostgreSQL. El esquema ejecutable
+está en `backend/src/database/schema.sql` y los datos iniciales en
+`backend/src/database/seed.sql`. Todavía faltan módulos de pedidos, pagos,
+transferencias, auditoría y guards JWT.
 
 ## 4. Arquitectura actual del frontend
 
@@ -210,14 +211,10 @@ exista un historial de commits o una implementación de backend detrás de ellas
 
 ### Prioridad alta: convertir el prototipo en sistema real
 
-- Elegir y configurar framework del backend.
-- Crear la base de datos a partir del esquema conceptual.
-- Implementar migraciones, relaciones, índices y restricciones.
-- Exponer API para catálogo, sucursales, inventario, clientes, carrito, pedidos
-  y ventas.
-- Reemplazar los datos constantes de `CatalogService` por repositorios y
-  llamadas a la API.
-- Implementar autenticación, manejo de sesión, roles y permisos.
+- Completar migraciones versionadas; por ahora se usa un esquema SQL inicial.
+- Implementar API de carrito, pedidos, pagos, transferencias y reportes.
+- Reemplazar los datos constantes de `CatalogService` por llamadas a la API.
+- Completar JWT, manejo de sesión, guards y permisos por rol.
 - Conectar el `DemoAccessGuard` a permisos reales.
 
 ### Prioridad funcional
@@ -256,7 +253,23 @@ exista un historial de commits o una implementación de backend detrás de ellas
 
 ## 9. Ejecución y verificación
 
-Requisitos: Flutter instalado con soporte web y un navegador compatible.
+Requisitos: Flutter para el prototipo visual, Node.js/npm y Docker para el
+backend PostgreSQL.
+
+Backend:
+
+```powershell
+cd backend
+Copy-Item .env.example .env
+docker compose up -d
+npm install
+# Ejecutar src/database/schema.sql y src/database/seed.sql en la base vesta
+npm run start:dev
+```
+
+La API queda disponible en `http://localhost:3000/api`.
+
+Frontend prototipo:
 
 ```powershell
 cd frontend
